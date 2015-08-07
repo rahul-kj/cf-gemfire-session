@@ -3,6 +3,7 @@ instances: 1
 memory: 512M
 applications:
   - name: cf-gemfire-session
-    path: target/cf-gemfire-session-0.0.1-SNAPSHOT.war
-    services:
-      - gemfire-service
+    path: target/cf-gemfire-session-1.0.0-BUILD-SNAPSHOT.war
+    
+services:
+  - session_replication
