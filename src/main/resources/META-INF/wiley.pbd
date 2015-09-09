@@ -1,0 +1,2 @@
+TraceAllMethodsOfClass: io.rahul.example.CounterService MethodTraceIncrementor "CounterService|{classname}|{method}:Incrementor Count"
+TraceAllMethodsOfClass: io.rahul.example.HomeController MethodTraceIncrementor "HomeController|{classname}|{method}:Incrementor Count"

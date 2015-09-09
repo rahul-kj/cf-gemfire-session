@@ -6,4 +6,8 @@ applications:
     path: target/cf-gemfire-session-1.0.0-BUILD-SNAPSHOT.war
     
 services:
+# - introscope
   - session_replication
+
+env:
+   JAVA_OPTS: -Dcom.wily.introscope.agent.agentName=WileyAppAgent -Dcom.wily.introscope.agentProfile=/home/vcap/app/.java-buildpack/introscope_agent/core/config/IntroscopeAgent.tomcat-osgi-legacy.profile -Dintroscope.autoprobe.directivesFile=tomcat-typical-legacy.pbl,/home/vcap/app/WEB-INF/classes/META-INF/wiley.pbd
