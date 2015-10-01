@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -64,30 +65,43 @@ public class HomeController implements Serializable {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/env", method = RequestMethod.GET, produces = "application/json")
 	public String getEnv(HttpServletRequest request, Model model) {
-		Map<String, Object> vcap_details = new HashMap<String, Object>();
+		Map<String, Object> vcap_details = new LinkedHashMap<String, Object>();
 		vcap_details.put("VCAP_SERVICES", System.getenv("VCAP_SERVICES"));
 		vcap_details.put("VCAP_APPLICATION", System.getenv("VCAP_APPLICATION"));
+		vcap_details.put("VCAP_APP_HOST", System.getenv("VCAP_APP_HOST"));
+		vcap_details.put("VCAP_APP_PORT", System.getenv("VCAP_APP_PORT"));
+		vcap_details.put("USER", System.getenv("USER"));
+		vcap_details.put("HOME", System.getenv("HOME"));
+		vcap_details.put("MEMORY_LIMIT", System.getenv("MEMORY_LIMIT"));
+		vcap_details.put("PORT", System.getenv("PORT"));
+		vcap_details.put("PWD", System.getenv("PWD"));
+		vcap_details.put("TMPDIR", System.getenv("TMPDIR"));
+		vcap_details.put("CF_INSTANCE_ADDR", System.getenv("CF_INSTANCE_ADDR"));
+		vcap_details.put("CF_INSTANCE_INDEX", System.getenv("CF_INSTANCE_INDEX"));
+		vcap_details.put("CF_INSTANCE_IP", System.getenv("CF_INSTANCE_IP"));
+		vcap_details.put("CF_INSTANCE_PORT", System.getenv("CF_INSTANCE_PORT"));
+		vcap_details.put("CF_INSTANCE_PORTS", System.getenv("CF_INSTANCE_PORTS"));
 		
 		
-		Map<String, Object> remote_details = new HashMap<String, Object>();
+		Map<String, Object> remote_details = new LinkedHashMap<String, Object>();
 		remote_details.put("REMOTE ADDRESS: ", request.getRemoteAddr());
 		remote_details.put("REMOTE HOST: ", request.getRemoteHost());
 		remote_details.put("REMOTE PORT: ", request.getRemotePort());
 		remote_details.put("REMOTE USER: ", request.getRemoteUser());
 
-		Map<String, Object> server_details = new HashMap<String, Object>();
+		Map<String, Object> server_details = new LinkedHashMap<String, Object>();
 		server_details.put("SERVER NAME: ", request.getServerName());
 		server_details.put("SERVER PORT: ", request.getServerPort());
 
 		
-		Map<String, Object> header_details = new HashMap<String, Object>();
+		Map<String, Object> header_details = new LinkedHashMap<String, Object>();
 		Enumeration headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
 			String headerName = (String) headerNames.nextElement();
 			header_details.put(headerName, request.getHeader(headerName));
 		}
 
-		Map<String, Object> attr_details = new HashMap<String, Object>();
+		Map<String, Object> attr_details = new LinkedHashMap<String, Object>();
 		Enumeration<String> attributeNames = request.getAttributeNames();
 		while (attributeNames.hasMoreElements()) {
 			String attributeName = attributeNames.nextElement();
